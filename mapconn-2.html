@@ -1,0 +1,59 @@
+
+
+<html>
+<head>
+    <title>MapConn</title>
+
+<style>
+html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+</style>
+<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+</head>
+<body>
+
+ <div id="map-canvas"></div>
+
+
+<script>
+
+var map,
+    trafficLayer;
+        
+function initialize() {
+    var myLatlng = new google.maps.LatLng(37.8759471,-122.280622);
+    var mapOptions = {
+        zoom: 15,
+        center: myLatlng,
+        backgroundColor: 'black',
+        mapTypeId: google.maps.MapTypeId.HYBRID
+    }
+    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);   
+
+    trafficLayer = new google.maps.TrafficLayer();
+    trafficLayer.setMap(map);         
+}
+    
+$(function () {
+    initialize();
+    setInterval(reloadTiles, 5000);         
+});
+
+function reloadTiles() {
+    var tiles = $("#map-canvas").find("img");
+    for (var i = 0; i < tiles.length; i++) {
+        var src = $(tiles[i]).attr("src");
+        if (/googleapis.com\/vt\?pb=/.test(src)) {              
+            var new_src = src.split("&ts")[0] + '&ts=' + (new Date()).getTime();
+            $(tiles[i]).attr("src", new_src);                                                   
+        }               
+    }
+}
+</script>
+
+</body>
+</html>
