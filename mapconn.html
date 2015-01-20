@@ -28,7 +28,9 @@ function initialize() {
     var myLatlng = new google.maps.LatLng(37.8759471,-122.280622);
     var mapOptions = {
         zoom: 12,
-        center: myLatlng
+        center: myLatlng,
+        backgroundColor: 'black',
+        mapTypeId: google.maps.MapTypeId.HYBRID
     }
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);   
 
