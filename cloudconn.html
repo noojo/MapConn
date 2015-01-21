@@ -2,7 +2,7 @@
 
 <html>
 <head>
-    <title>MapConn</title>
+    <title>CloudConn</title>
 
 <style>
 html, body, #map-canvas {
@@ -30,18 +30,21 @@ var map,
 function initialize() {
     var myLatlng = new google.maps.LatLng(37.8759471,-122.280622);
     var mapOptions = {
-        zoom: 12,
+        zoom: 6,
         center: myLatlng,
         backgroundColor: 'black',
         mapTypeId: google.maps.MapTypeId.HYBRID
     }
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);   
 
-    trafficLayer = new google.maps.TrafficLayer();
-    trafficLayer.setMap(map);    
+    // trafficLayer = new google.maps.TrafficLayer();
+    // trafficLayer.setMap(map);  
+
+    var cloudLayer = new google.maps.weather.CloudLayer();
+    cloudLayer.setMap(map); 
 
     var weatherLayer = new google.maps.weather.WeatherLayer();
-    weatherLayer.setMap(map);           
+    weatherLayer.setMap(map);      
 }
     
 $(function () {
